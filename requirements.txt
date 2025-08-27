@@ -1,4 +1,6 @@
 fastapi
 uvicorn
+pdfplumber
+uvicorn
 docling
 python-multipart

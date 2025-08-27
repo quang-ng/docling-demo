@@ -1,9 +1,14 @@
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import PlainTextResponse
+import pdfplumber
+import io
 from docling.document_converter import DocumentConverter
 import tempfile
 
+
 app = FastAPI()
+
 
 def get_markdown_from_file(file_bytes: bytes) -> str:
     """
@@ -15,6 +20,7 @@ def get_markdown_from_file(file_bytes: bytes) -> str:
     converter = DocumentConverter()
     result = converter.convert(tmp_path)
     return result.document.export_to_markdown()
+
 
 @app.post("/markdown", response_class=PlainTextResponse)
 async def get_markdown(file: UploadFile = File(...)):
